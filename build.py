@@ -450,7 +450,7 @@ https://developers.google.com/blockly/hacking/closure""")
   try:
     opts, args = getopt.getopt(argv,"u",["uncompressed-only"])
   except getopt.GetoptError:
-    print 'build.py [--uncompressed-only]'
+    print ('build.py [--uncompressed-only]')
     sys.exit(2)
   for opt, arg in opts:
     if opt in ("-u", "--uncompressed-only"):
