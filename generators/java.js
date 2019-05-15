@@ -101,7 +101,7 @@ Blockly.Java.INDENT = '    ';
 /**
  * Any extra indent to be added to the currently generating code block
  */
-Blockly.Java.EXTRAINDENT = '';
+Blockly.Java.EXTRAINDENT = '  ';
 /**
  * List of all known Java variable types.
  *  NOTE: Only valid after a call to workspaceToCode
