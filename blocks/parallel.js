@@ -32,8 +32,19 @@ Blockly.Blocks['worker'] = {
     this.appendStatementInput("JOB")
         .setCheck(null)
         .appendField("With job function");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+Blockly.Blocks['work'] = {
+  init: function() {
+    this.appendStatementInput("NAME")
+        .setCheck(null)
+        .appendField("Declare work class");
     this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
@@ -58,6 +69,20 @@ Blockly.Blocks['create_worker'] = {
   }
 };
 
+
+Blockly.Blocks['jobs'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Initialize jobs as  ")
+        .appendField(new Blockly.FieldDropdown([["coarse","COARSE"], ["fine","FINE"], ["mix","MIX"]]), "NAME");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 
 Blockly.Blocks['start_work'] = {
@@ -84,3 +109,29 @@ Blockly.Blocks['join_worker'] = {
  this.setHelpUrl("");
   }
 };
+
+
+Blockly.Blocks['main_block'] = {
+  init: function() {
+    this.appendStatementInput("NAME")
+        .setCheck(null)
+        .appendField("Main");
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['distribute_work'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Distribute jobs to workers");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+

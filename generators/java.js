@@ -128,7 +128,7 @@ Blockly.Java.Baseclass_ = '';
  * List of libraries used globally by the generated java code. These are
  * Processed by Blockly.Java.addImport
  */
-Blockly.Java.needImports_ = ['java.util.ArrayList'];
+Blockly.Java.needImports_ = ['java.util.ArrayList', 'java.awt.Color'];
 /**
  * List of interfaces that this class implements
  **/
