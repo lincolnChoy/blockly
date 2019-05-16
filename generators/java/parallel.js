@@ -40,6 +40,7 @@ goog.require('Blockly.Java');
       
         @Override
         public void run() {
+          System.out.println("The main thread is "+Thread.currentThread().getId());
           ${statements_job}
         }\n   }\n`;
     return code;

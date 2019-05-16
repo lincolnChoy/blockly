@@ -128,7 +128,7 @@ Blockly.Java.Baseclass_ = '';
  * List of libraries used globally by the generated java code. These are
  * Processed by Blockly.Java.addImport
  */
-Blockly.Java.needImports_ = [];
+Blockly.Java.needImports_ = ['java.util.ArrayList'];
 /**
  * List of interfaces that this class implements
  **/
@@ -422,6 +422,7 @@ Blockly.Java.getValueType = function(block, field) {
 }
 
 Blockly.Java.provideVarClass = function() {
+
   if (this.INLINEVARCLASS) {
     Blockly.Java.addImport('java.text.DecimalFormat');
     Blockly.Java.addImport('java.text.NumberFormat');
