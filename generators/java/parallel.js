@@ -4,13 +4,6 @@ goog.provide('Blockly.Java.parallel');
 
 goog.require('Blockly.Java');
 
-  Blockly.Java['something'] = function(block) {
-    var value_name = Blockly.Java.valueToCode(block, 'NAME', Blockly.Java.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = `x = "${value_name}";\nSystem.out.println(x);`;
-    return code;
-  };
-
   Blockly.Java['class'] = function(block) {
     var text_cname = block.getFieldValue('CNAME');
     var text_ename = block.getFieldValue('ENAME');
@@ -39,27 +32,51 @@ goog.require('Blockly.Java');
 
   Blockly.Java['worker'] = function(block) {
     // TODO: Assemble JavaScript into code variable.
-    var code = `static class Worker extends Thread {
-
-    private int value;
+    var statements_job = Blockly.Java.statementToCode(block, 'JOB');
+    var code = `    static class Worker extends Thread {
       
-    public Worker(int value) {
-       this.value = value;
-    }
+        public Worker() {
+        }
       
-    @Override
-    public void run() {
-      Work.computeWork(value);
-    }\n}`;
+        @Override
+        public void run() {
+          ${statements_job}
+        }\n   }\n`;
     return code;
   };
 
 
   Blockly.Java['create_worker'] = function(block) {
-    var text_name = block.getFieldValue('NAME');
-    var value_numjobs = Blockly.JavaScript.valueToCode(block, 'NUMJOBS', Blockly.JavaScript.ORDER_ATOMIC);
-    var value_jobsize = Blockly.JavaScript.valueToCode(block, 'JOBSIZE', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_numworkers = Blockly.Java.valueToCode(block, 'NUMWORKERS', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = '    ArrayList<Worker> workerList = new ArrayList<Worker>();\n';
     // TODO: Assemble JavaScript into code variable.
-    var code = `Thread ${text_name} = new Worker(${value_jobsize});\n`;
+      code += `
+      for (int i = 0; i < ${value_numworkers}; i++){
+          workerList.add(new Worker());\n
+      }\n`
     return code;
   };
+
+  Blockly.Java['start_work'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = `
+    for (int i = 0; i < workerList.size; i++) {
+    workerList.get(i).start();
+    };\n`;
+    return code;
+  };
+
+  Blockly.Java['join_worker'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = `
+    try {
+      for (int i = 0; i < workerList.size; i++) {
+          workerList.get(i).join();
+      }\n
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }`;
+    return code;
+  };
+
+  

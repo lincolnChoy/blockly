@@ -4,22 +4,6 @@ goog.provide('Blockly.Blocks.parallel');
 
 goog.require('Blockly.Blocks');
 
-
-Blockly.Blocks['something'] = {
-    init: function() {
-      this.appendValueInput("NAME")
-          .setCheck("Number")
-          .appendField("Something");
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(230);
-   this.setTooltip("");
-   this.setHelpUrl("");
-    }
-};
-
-
-
 Blockly.Blocks['class'] = {
   init: function() {
     this.appendDummyInput()
@@ -45,6 +29,9 @@ Blockly.Blocks['worker'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Define Worker");
+    this.appendStatementInput("JOB")
+        .setCheck(null)
+        .appendField("With job function");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -57,15 +44,39 @@ Blockly.Blocks['worker'] = {
 
 Blockly.Blocks['create_worker'] = {
   init: function() {
-    this.appendValueInput("NUMJOBS")
+    this.appendValueInput("NUMWORKERS")
         .setCheck("Number")
-        .appendField("Create Worker called")
-        .appendField(new Blockly.FieldTextInput("default"), "NAME")
-        .appendField("with");
-    this.appendValueInput("JOBSIZE")
-        .setCheck("Number")
-        .appendField("jobs of size");
+        .appendField("Create");
+    this.appendDummyInput()
+        .appendField("Workers");
     this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+Blockly.Blocks['start_work'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Start work");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['join_worker'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Main thread joins worker threads");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
