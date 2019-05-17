@@ -4,36 +4,63 @@ goog.provide('Blockly.Java.parallel');
 
 goog.require('Blockly.Java');
 
-  Blockly.Java['class'] = function(block) {
-    var text_cname = block.getFieldValue('CNAME');
-    var text_ename = block.getFieldValue('ENAME');
-    var text_iname = block.getFieldValue('INAME');
-    var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
-    // TODO: Assemble JavaScript into code variable.
-    var code = `public class `;
-    if (text_cname != 'default') {
-      code += text_cname + ' ';
-    } else {
-      code += 'replace_class_name';
-    }
-    if (text_ename != 'default') {
-      code += 'extends ' + text_ename + ' ';
-    }
-    if (text_iname != 'default') {
-      code += 'implements ' + text_iname + ' ';
-    }
-    code += '{\n';
-    if (statements_name != '') {
-      code += statements_name;
-    }
-    code += '}';
-    return code;
-  };
+  // Blockly.Java['class'] = function(block) {
+  //   var text_cname = block.getFieldValue('CNAME');
+  //   var text_ename = block.getFieldValue('ENAME');
+  //   var text_iname = block.getFieldValue('INAME');
+  //   var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+  //   // TODO: Assemble JavaScript into code variable.
+  //   var code = `public class `;
+  //   if (text_cname != 'default') {
+  //     code += text_cname + ' ';
+  //   } else {
+  //     code += 'replace_class_name';
+  //   }
+  //   if (text_ename != 'default') {
+  //     code += 'extends ' + text_ename + ' ';
+  //   }
+  //   if (text_iname != 'default') {
+  //     code += 'implements ' + text_iname + ' ';
+  //   }
+  //   code += '{\n';
+  //   if (statements_name != '') {
+  //     code += statements_name;
+  //   }
+  //   code += '}';
+  //   return code;
+  // };
 
   Blockly.Java['worker'] = function(block) {
     // TODO: Assemble JavaScript into code variable.
+    var dropdown_name = block.getFieldValue('NAME');
     var statements_job = Blockly.Java.statementToCode(block, 'JOB');
-    var code = `    static class Worker extends Thread {
+    if (dropdown_name == 'DYNAMIC') {
+      var code = `
+    static class WorkerSharingTasks extends Thread {
+      
+        private ConcurrentLinkedQueue<Integer> sharedQueue;
+      
+        public WorkerSharingTasks(ConcurrentLinkedQueue<Integer> sharedQueue) {
+          this.sharedQueue = sharedQueue;
+        }
+      
+        @Override
+        public void run() {
+            System.out.println("The thread is " + Thread.currentThread().getId() + " and has started");\n`
+      if (statements_job) {
+        code += statements_job;
+      } else {
+        code += `
+            int count = 0;
+          
+            while ( (amount = sharedQueue.poll()) != null ) {
+                Work.computeWork(amount);
+                count++;
+            }`;
+      }
+    } else {
+      var code = `
+    static class Worker extends Thread {
       
         private ArrayList<Integer> privateWork;
 
@@ -43,18 +70,21 @@ goog.require('Blockly.Java');
       
         @Override
         public void run() {
-            System.out.println("The thread is "+Thread.currentThread().getId() + " and has started");\n`
-    if (statements_job) {
-      code += statements_job;
-    } else {
-      code += `
+            System.out.println("The thread is " + Thread.currentThread().getId() + " and has started");\n`
+      if (statements_job) {
+        code += statements_job;
+      } else {
+        code += `
+            int count = 0;
             for (Integer amount: privateWork) {
                 Work.computeWork(amount);
+                count++;
             }`;
+      }
     }
     
     code += `
-        System.out.println("The thread is "+Thread.currentThread().getId() + " and is complete");
+        System.out.println("The thread is " + Thread.currentThread().getId() + " and has completed " + count + " tasks");
         }\n
     }\n`;
     return code;
@@ -171,38 +201,38 @@ goog.require('Blockly.Java');
   };
 
 
-  Blockly.Java['create_worker'] = function(block) {
-    var value_numworkers = Blockly.Java.valueToCode(block, 'NUMWORKERS', Blockly.Java.ORDER_ATOMIC);
-    var code = 'ArrayList<Worker> workerList = new ArrayList<Worker>();\n';
-    // TODO: Assemble JavaScript into code variable.
-      code += `
-      for (int i = 0; i < ${value_numworkers}; i++){
-          workerList.add(new Worker(iwork));\n
-      }\n`
-    return code;
-  };
+  // Blockly.Java['create_worker'] = function(block) {
+  //   var value_numworkers = Blockly.Java.valueToCode(block, 'NUMWORKERS', Blockly.Java.ORDER_ATOMIC);
+  //   var code = 'ArrayList<Worker> workerList = new ArrayList<Worker>();\n';
+  //   // TODO: Assemble JavaScript into code variable.
+  //     code += `
+  //     for (int i = 0; i < ${value_numworkers}; i++){
+  //         workerList.add(new Worker(iwork));\n
+  //     }\n`
+  //   return code;
+  // };
 
-  Blockly.Java['start_work'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = `
-    for (int i = 0; i < workerList.size(); i++) {
-        workerList.get(i).start();
-    };\n`;
-    return code;
-  };
+  // Blockly.Java['start_work'] = function(block) {
+  //   // TODO: Assemble JavaScript into code variable.
+  //   var code = `
+  //   for (int i = 0; i < workerList.size(); i++) {
+  //       workerList.get(i).start();
+  //   };\n`;
+  //   return code;
+  // };
 
-  Blockly.Java['join_worker'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = `
-    try {
-      for (int i = 0; i < workerList.size(); i++) {
-          workerList.get(i).join();
-      }\n
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }`;
-    return code;
-  };
+  // Blockly.Java['join_worker'] = function(block) {
+  //   // TODO: Assemble JavaScript into code variable.
+  //   var code = `
+  //   try {
+  //     for (int i = 0; i < workerList.size(); i++) {
+  //         workerList.get(i).join();
+  //     }\n
+  //   } catch (InterruptedException e) {
+  //       e.printStackTrace();
+  //   }`;
+  //   return code;
+  // };
 
   Blockly.Java['main_block'] = function(block) {
     var statements_name = Blockly.Java.statementToCode(block, 'NAME');
@@ -214,16 +244,51 @@ goog.require('Blockly.Java');
   };
 
   Blockly.Java['distribute_work'] = function(block) {
-
-    
+  var dropdown_name = block.getFieldValue('NAME');
+  var code = '';
   // TODO: Assemble JavaScript into code variable.
-  var code = `\n
-    /* This block distributes the tasks evenly to the workers */
-    int numWorkers = Runtime.getRuntime().availableProcessors();
-    int numTasksPerWorker = itemsToProcess.size()/numWorkers;
-    ArrayList<Worker> workers = new ArrayList<>();
+  if (dropdown_name == 'DYNAMIC') {
+    code += `\n
+    /* This block distributes the tasks dynamically to the workers */`;
+  } else {
+    code += `\n
+    /* This block distributes the tasks statically to the workers */`;
+  }
 
-    for (int i = 0; i < numWorkers; i++) {
+  code += `
+    int numWorkers = Runtime.getRuntime().availableProcessors();
+    int numTasksPerWorker = itemsToProcess.size()/numWorkers;`;
+
+  if (dropdown_name == 'DYNAMIC') {
+    code += `
+    ArrayList<WorkerSharingTasks> workers = new ArrayList<>();
+
+    ConcurrentLinkedQueue<Integer> sharedQueue = new ConcurrentLinkedQueue<>();
+    sharedQueue.addAll(itemsToProcess);
+    
+        for (int i = 0; i < numWorkers; i++) {
+            WorkerSharingTasks w = new WorkerSharingTasks(sharedQueue);
+            workers.add(w);
+            w.start();
+        }
+    
+        for (WorkerSharingTasks w: workers) {
+            try {
+                w.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        /* ----------------------------------- */\n`;
+
+  } else {
+    code +=`
+    ArrayList<WorkerSharingTasks> workers = new ArrayList<>();
+
+    ConcurrentLinkedQueue<Integer> sharedQueue = new ConcurrentLinkedQueue<>();
+    sharedQueue.addAll(itemsToProcess);
+    
+        for (int i = 0; i < numWorkers; i++) {
         ArrayList<Integer> privateWork = new ArrayList<>();
         privateWork.addAll(itemsToProcess.subList(numTasksPerWorker*i, numTasksPerWorker*(i+1)));
       
@@ -239,8 +304,9 @@ goog.require('Blockly.Java');
             e.printStackTrace();
         }
     }
-    /* ----------------------------------- */\n
-    `;
+    /* ----------------------------------- */\n`;
+  }
+
   return code;
   };
 
