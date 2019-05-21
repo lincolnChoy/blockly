@@ -32,7 +32,38 @@ goog.require('Blockly.Java');
 
 
 
-  Blockly.Java['work'] = function(block) {
+  Blockly.Java['task_two_worker'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    
+    var code = `
+    static class Worker extends Thread {
+      
+        private ArrayList<Integer> privateWork;
+
+        public Worker(ArrayList<Integer> privateWork) {
+            this.privateWork = privateWork;
+        }
+      
+        @Override
+        public void run() {
+            System.out.println("Thread " + Thread.currentThread().getId() + " has started");\n`
+        
+    code += `
+            int count = 0;
+            for (Integer amount: privateWork) {
+                Work.computeWork(amount);
+                count++;
+            }`;
+    
+    code += `
+        System.out.println("Thread " + Thread.currentThread().getId() + " has completed " + count + " tasks");
+        }\n
+    }\n`;
+    return code;
+  };
+
+
+  Blockly.Java['task_two_work'] = function(block) {
     // TODO: Assemble JavaScript into code variable.
 
     var code = `
@@ -53,6 +84,7 @@ goog.require('Blockly.Java');
                 }
             }
         }
+
 
         public static class Complex {
             private final double re;   // the real part
@@ -126,31 +158,6 @@ goog.require('Blockly.Java');
     return code;
   };
 
-
-  Blockly.Java['sequential'] = function(block) {
-    var value_name = Blockly.Java.valueToCode(block, 'SIZE', Blockly.Java.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = `
-    Work.computeWork(${value_name});\n`;
-    return code;
-  };
-
-  Blockly.Java['start_timer'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = `
-    long startTime = System.currentTimeMillis();\n`;
-    return code;
-  };
-
-  Blockly.Java['stop_timer'] = function(block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = `
-    long totalTime = System.currentTimeMillis() - startTime;
-    System.out.println("Total time = " + totalTime + " milliseconds");\n`;
-    return code;
-  };
-
-
   // Blockly.Java['create_worker'] = function(block) {
   //   var value_numworkers = Blockly.Java.valueToCode(block, 'NUMWORKERS', Blockly.Java.ORDER_ATOMIC);
   //   var code = 'ArrayList<Worker> workerList = new ArrayList<Worker>();\n';
@@ -184,7 +191,7 @@ goog.require('Blockly.Java');
   //   return code;
   // };
 
-  Blockly.Java['main_block'] = function(block) {
+  Blockly.Java['task_two_main_block'] = function(block) {
     var statements_name = Blockly.Java.statementToCode(block, 'NAME');
     // TODO: Assemble JavaScript into code variable.
     var code = `
@@ -193,3 +200,113 @@ goog.require('Blockly.Java');
     return code;
   };
 
+  Blockly.Java['task_two_distribute_work'] = function(block) {
+    var dropdown_threads = block.getFieldValue('THREADS');
+    var code = '';
+  // TODO: Assemble JavaScript into code variable.
+    code += `\n
+    /* This block distributes the tasks statically to the workers */`;
+
+    if (dropdown_threads == 'CORE') {
+        code += `
+    int numWorkers = Runtime.getRuntime().availableProcessors();`
+    } else {
+        code += `
+    int numWorkers = numTasks;`
+    }
+
+    code += `
+    int numTasksPerWorker = itemsToProcess.size()/numWorkers;
+    int extraTasks = numTasks % numTasksPerWorker;
+    ArrayList<Worker> workers = new ArrayList<>();
+
+
+    int offset = 0;
+    for (int i = 0; i < numWorkers; i++) {
+        ArrayList<Integer> privateWork = new ArrayList<>();
+
+        if (extraTasks > 0) {
+            privateWork.addAll(itemsToProcess.subList(numTasksPerWorker*i + offset, numTasksPerWorker*(i+1) + 1 + offset));
+            offset++;
+            extraTasks--;
+        } else {
+            privateWork.addAll(itemsToProcess.subList(numTasksPerWorker*i + offset, numTasksPerWorker*(i+1) + offset));
+        }
+        
+        Worker w = new Worker(privateWork);
+        workers.add(w);
+        w.start();
+    }
+
+    for (Worker w: workers) {
+        try {
+            w.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    /* ----------------------------------- */\n`;
+
+  return code;
+  };
+
+  Blockly.Java['task_two_jobs'] = function(block) {
+    var value_numtask = Blockly.JavaScript.valueToCode(block, 'NUMTASK', Blockly.JavaScript.ORDER_ATOMIC);
+    var dropdown_size = block.getFieldValue('SIZE');
+    var code = `
+    ArrayList<Integer> itemsToProcess = new ArrayList<Integer>();
+		
+    int numTasks = ${value_numtask};`
+
+    if (dropdown_size == 'COARSE') {
+        code +=`
+    int granularityOfTask = 300;
+
+    //-- Add the items to a list
+    for (int i = 0; i < numTasks; i++) {
+        itemsToProcess.add(granularityOfTask);
+    }`;
+    } else if (dropdown_size == 'FINE') {
+        code +=`
+    int granularityOfTask = 1;  
+
+    //-- Add the items to a list
+    for (int i = 0; i < numTasks; i++) {
+        itemsToProcess.add(granularityOfTask);
+    }`;
+    } else {
+        code +=`
+    int granularityOfFineTask = 1;
+    int granularityOfCoarseTask = 300;
+
+    int temp = 0;
+    //-- Add the items to a list
+    for (int i = 0; i < numTasks; i++) {
+        temp = (Math.random() <= 0.5) ? 1 : 2;
+        if (temp == 1) {
+            itemsToProcess.add(granularityOfFineTask);
+        } else {
+            itemsToProcess.add(granularityOfCoarseTask);
+        }
+    }`;
+    }
+
+    code += '\n';
+    return code;
+  };
+
+  
+  Blockly.Java['start_timer'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = `
+    long startTime = System.currentTimeMillis();\n`;
+    return code;
+  };
+
+  Blockly.Java['stop_timer'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = `
+    long totalTime = System.currentTimeMillis() - startTime;
+    System.out.println("Total time = " + totalTime + " milliseconds");\n`;
+    return code;
+  };

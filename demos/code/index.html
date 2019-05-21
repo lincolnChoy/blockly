@@ -21,7 +21,12 @@
   <script src="../../generators/java/colour.js"></script>
   <script src="../../generators/java/procedures.js"></script>
   <script src="../../generators/java/parallel.js"></script>
+  <script src="../../generators/java/task_two.js"></script>
+  <script src="../../generators/java/task_three.js"></script>
   <script src="../../blocks/parallel.js"></script>
+  <script src="../../blocks/task_two.js"></script>
+  <script src="../../blocks/task_three.js"></script>
+  <script src="workspace.js"></script>
   <script src="code.js"></script>
 </head>
 <body>
@@ -387,15 +392,46 @@
     <category id="catParallel" colour="250">
       <!-- <block type="class"></block> -->
       <block type="main_block"></block>
-      <block type="worker"></block>
-      <!-- <block type="create_worker"></block> -->
-      <!-- <block type="start_work"></block>      -->
-      <!-- <block type="join_worker"></block> -->
-      <block type="jobs"></block>
-      <block type="distribute_work"></block>
+      <block type="sequential">
+        <value name="SIZE">
+          <shadow type="math_number">
+            <field name="NUM">200</field>
+          </shadow>
+        </value>
+      </block>
       <block type="work"></block>
-      
-
+      <block type ="start_timer"></block>
+      <block type ="stop_timer"></block>
+    </category>
+    <category id="catTaskTwo" colour="150">
+      <block type="task_two_main_block"></block>
+      <block type="task_two_worker"></block>
+      <block type="task_two_jobs">
+        <value name="NUMTASK">
+          <shadow type="math_number">
+            <field name="NUM">6</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="task_two_distribute_work"></block>
+      <block type="task_two_work"></block>
+      <block type ="start_timer"></block>
+      <block type ="stop_timer"></block>
+    </category>
+    <category id="paraTaskThree" colour="136">
+      <block type="task_three_main_block"></block>
+      <block type="task_three_worker"></block>
+      <block type="task_three_jobs">
+        <value name="NUMTASK">
+          <shadow type="math_number">
+            <field name="NUM">6</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="task_three_distribute_work"></block>
+      <block type="task_three_work"></block>
+      <block type ="start_timer"></block>
+      <block type ="stop_timer"></block>
     </category>
 
   </xml>

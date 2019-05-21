@@ -25,34 +25,70 @@ goog.require('Blockly.Blocks');
 
 
 
-Blockly.Blocks['worker'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Define Worker with")
-        .appendField(new Blockly.FieldDropdown([["Static tasking","STATIC"], ["Dynamic tasking","DYNAMIC"]]), "NAME");
-    this.appendStatementInput("JOB")
-        .setCheck(null)
-        .appendField("With job function");
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-
 
 Blockly.Blocks['work'] = {
   init: function() {
-    this.appendStatementInput("NAME")
-        .setCheck(null)
-        .appendField("Declare work class");
+    this.appendDummyInput()
+        .appendField("Declare Work class");
+    this.setColour(230);
+ this.setTooltip("This block creates a Class with a method to compute work. complex numbers");
+ this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['sequential'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Start work on 1 task");
+    this.appendValueInput("SIZE")
+        .setCheck("Number")
+        .appendField("With task size");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("Run the compute work method from the work class.");
+ this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['start_timer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("start timer");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
   }
 };
 
+Blockly.Blocks['stop_timer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("stop timer");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
+Blockly.Blocks['timer'] = {
+  init: function() {
+    this.appendStatementInput("TIME_STATEMENT")
+        .setCheck(null)
+        .appendField("timer");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 // Blockly.Blocks['create_worker'] = {
 //   init: function() {
@@ -69,21 +105,6 @@ Blockly.Blocks['work'] = {
 //  this.setHelpUrl("");
 //   }
 // };
-
-
-Blockly.Blocks['jobs'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Initialize jobs as  ")
-        .appendField(new Blockly.FieldDropdown([["coarse","COARSE"], ["fine","FINE"], ["mix","MIX"]]), "NAME");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
 
 
 // Blockly.Blocks['start_work'] = {
@@ -117,20 +138,6 @@ Blockly.Blocks['main_block'] = {
     this.appendStatementInput("NAME")
         .setCheck(null)
         .appendField("Main");
-    this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-
-Blockly.Blocks['distribute_work'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Distribute jobs to workers")
-        .appendField(new Blockly.FieldDropdown([["statically","STATIC"], ["dynamically","DYNAMIC"]]), "NAME");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
     this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
