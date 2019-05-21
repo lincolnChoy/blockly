@@ -7,7 +7,7 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks['task_three_worker'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Define Worker with")
+        .appendField("Declare Worker class with")
         .appendField(new Blockly.FieldDropdown([["static tasking","STATIC"], ["dynamic tasking","DYNAMIC"]]), "NAME");
     this.setColour(230);
  this.setTooltip("");

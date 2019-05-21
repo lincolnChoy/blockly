@@ -9,7 +9,7 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks['task_two_worker'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Declare Worker class with list of private work")
+        .appendField("Declare Worker class")
     this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
