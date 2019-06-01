@@ -3,10 +3,7 @@ html, body {
 }
 
 body {
-  background-color: #fff;
-  font-family: sans-serif;
-  margin: 0;
-  overflow: hidden;
+  background-color: #B6D6CC;
 }
 
 .farSide {
@@ -15,6 +12,22 @@ body {
 
 html[dir="RTL"] .farSide {
   text-align: left;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+  font-family: Georgia;
+}
+
+h3 {
+  color: #D95D39;
+}
+
+.section {
+  margin: 35px;
 }
 
 /* Buttons */
