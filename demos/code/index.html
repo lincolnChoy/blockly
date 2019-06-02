@@ -38,41 +38,88 @@
     <p>
       Parallel computing is a type of computation which multiple processing elements collabrate to process a task simultaneously.
       Higer performance is aimed for using parallel computing techniques comparing with sequencial processing. 
-      Need to add more text to the introduction and an image to show the different between parallel and sequential.
-      The image need to be made by use due to the copyright problem.
+      By breaking up the problem into multiple parts, each processing element can execute the part with others simultaneously.
     </p>
-    <img src="seq_para_programming.png" alt="Parallel computing vs sequential computing"></img>
-    <p>
-      Parallel programming syntax. e.g. speed up.
-    </p>
+    <figure>
+        <img src="seq_para_programming.png" alt="Parallel computing vs sequential computing"></img>
+        <figcaption>Sequential processing vs parallel processing</figcaption>
+    </figure>
   </div>
 
   <div class="section">
     <h3>What is Blockly?</h3>
     <p>
-        Introduction to Blockly
+        <a href="https://developers.google.com/blockly/">Blockly</a> is an open-sourced, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
     </p>
     <p>
-      a blockly section
+        So Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to make your own programme. 
+        The blocks structure you make can be used to generate real JavaScript, Python, PHP, Lua and Dart code.
+        Extensions for other language can be found on Github. Here is the <a href="https://github.com/toebes-extreme/blockly">Java Extension of Blockly</a>.
     </p>
+    <h4>Try Blockly</h4>
+    <div id="try_blockly" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
+      <xml id="toolbox" style="display: none">
+          <category name="Logic">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+          </category>
+          <category name="Loops">
+            <block type="controls_repeat_ext">
+              <value name="TIMES">
+                <block type="math_number">
+                  <field name="NUM">10</field>
+                </block>
+              </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+          </category>
+          <category name="Math">
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+          </category>
+          <category name="Text">
+            <block type="text"></block>
+            <block type="text_length"></block>
+            <block type="text_print"></block>
+          </category>
+        </xml>
+        <button onclick="showCode()">Generate Java</button>
+        <button onclick="copyCode()">Copy Code to Clipboard</button>
+        <div id="try_blockly_out" class="blockly_output" style="height: 280px; width: 800px; overflow-y: scroll;"></div>
+      <script>
+        var workspace1 = Blockly.inject('try_blockly',
+        {media: '../../media/',
+        toolbox: document.getElementById('toolbox')});
+        Blockly.Xml.domToWorkspace(workspace1,
+        document.getElementById('startBlocks'));
 
-  </div>
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-  <xml id="toolbox" style="display: none">
-      <block type="controls_if"></block>
-      <block type="controls_whileUntil"></block>
-    </xml>
-    <script>
-      var workspace = Blockly.inject('blocklyDiv',
-          {toolbox: document.getElementById('toolbox')});
-    </script>
+        function showCode() {
+          // Generate JavaScript code and display it.
+          Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+          var code = Blockly.Java.workspaceToCode(workspace1);
+          //alert(code);
+          //code = Blockly.Java.workspaceToCode(Code.workspace);
+          document.getElementById("try_blockly_out").innerHTML = code;
+        }
+        function copyCode() {
+          var copyText1 = document.getElementById("try_blockly_out");
+          copyText1.select();
+          document.execCommand("copy");
+          alert("Java code Copied to Clipboard.");
+        }
+      </script>
+    </div>
 
   <div class="section">
       <h3>Parallel Programming in Java</h3>
       <p>
           Java parallel
       </p>
-      <h4>Example to process</h5>
+      <h4>Example to process</h4>
         <p>
             What is squential programming? What is the example we are using in Java?
         </p>
