@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="google" value="notranslate">
-  <title>Learn Parallel Programming Basis in Java using Blockly</title>
+  <title>Parallel programming with Blockly</title>
   <link rel="stylesheet" href="style.css">
   <script src="/storage.js"></script>
   <script src="../../blockly_compressed.js"></script>
@@ -29,7 +29,7 @@
 </head>
 
 <body>
-  <h1> Learn Parallel Programming Basis in Java using Blockly</h1>
+  <h1>Learn parallel programming concepts using Blockly!</h1>
 
   <div class="section">
     <h3> Introduction to Parallel Programming</h3>
@@ -417,6 +417,7 @@
       <li>Click on the <b>Generate Java</b> button to get the equivalent Java code. You can run this code in an IDE to see how long it takes to execute.</li>
       <li>You can try different task sizes and see how they affect the execution time.</li>
     </ol>
+    <br>
     <p>Explanation:</p>
     <p>Note the time that it takes for this program to execute on a <b>single</b> processor core.</p>
     <p>Imagine if we could somehow assign each one of these tasks to threads across all of the available processor cores, what would be the theoretical speedup of the program? (i.e. how much faster would it run?)</p> 
@@ -485,7 +486,7 @@
     </ol>
     <br>
     <p>Explanation:</p>
-    <p>You should notice that the execution time of the parallelized version should be around <b>n</b> times faster than the program in <b>Task one: Sequential Processing</b>, where <b>n</b> is the number of processors cores available.</p>
+    <p>You should notice that the execution time of the parallelized version should be around <b>n</b> times faster than the program in <b>Task one: Sequential Processing</b>, where <b>n</b> is the number of processor cores available.</p>
     <p>This is because, instead of having only <b>one</b> processor core working on some number of tasks, e.g. 4 tasks if you had 4 processor cores, it can spread the work load <b>evenly among the 4 cores</b>.</p>
     <p>Although threads are great for parallelizing tasks, it doesn't mean we should create as many threads as possible to maximize parallelization.</p>
     <p>In fact, threads can introduce <b>overhead</b> through the <b>creation/deletion</b> of the threads. That is, it takes time to create the threads and assign them tasks, and then deleting them also takes time.</p>
