@@ -5,7 +5,7 @@
   <meta name="google" value="notranslate">
   <title>Learn Parallel Programming Basis in Java using Blockly</title>
   <link rel="stylesheet" href="style.css">
-  <script src="/storage.js"></script>
+  <script src="../../appengine/storage.js"></script>
   <script src="../../blockly_compressed.js"></script>
   <script src="../../blocks_compressed.js"></script>
   <script src="../../javascript_compressed.js"></script>
@@ -26,6 +26,9 @@
   <script src="../../blocks/parallel.js"></script>
   <script src="../../blocks/task_two.js"></script>
   <script src="../../blocks/task_three.js"></script>
+  <script src="workspace.js"></script>
+  <script src="code.js"></script>
+  
 </head>
 
 <body>
@@ -372,8 +375,7 @@
 
       <script>
         var workspace1 = Blockly.inject('try_blockly',
-        {media: '../../media/',
-        toolbox: document.getElementById('toolbox_1')});
+        {toolbox: document.getElementById('toolbox_1')});
         Blockly.Xml.domToWorkspace(workspace1,
         document.getElementById('startBlocks'));
 
@@ -425,10 +427,16 @@
       </xml>
 
       <button onclick="showCode2()">Generate Java</button>
+      <button onclick="showHint1()">Show Hint</button>
+      <h4>Hint</h4>
+      <div style="height: 500px; width: 800px;">
+        <img id="hint1" src="t1_hint.png" alt="task1 hint" style="display:none;"></img>
+      </div>
 
       <h4>Generated Code</h4>
+      
       <pre id="content_t1" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
-
+      
       <script>
         var workspace2 = Blockly.inject('task1',
         {media: '../../media/',
@@ -446,6 +454,16 @@
             content_t1.innerHTML = code;
           }
         }
+
+        function showHint1() {
+          var x = document.getElementById("hint1");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        }
+
       </script> 
     </div>
   </div>
@@ -453,6 +471,10 @@
   <div id="task2_section" class="section">
     <h3>Task2: Granularity</h3>
     <p>Task2 descriptions:</p>
+    <figure>
+      <img src="granularity.png" alt="Fine grain, coarse grain and mixed grain parallelism"></img>
+      <figcaption>Fine grain, coarse grain and mixed grain parallelism</figcaption>
+    </figure>
     <p>What you need to do:</p>
     <ol>
       <li>Defines the task being performed.</li>
@@ -480,12 +502,17 @@
         </category>   
       </xml>
       <xml id="startBlocks2" style="display: none">
-        <block type="main_block" inline="false" x="20" y="20">
-        </block>
+        <block type="main_block" inline="false" x="20" y="20"></block>
         <block type="work" inline="false" x="20" y="80"></block>
+        <block type="task_two_worker" inline="false" x="20" y="140"></block>
       </xml>
 
       <button onclick="showCode3()">Generate Java</button>
+      <button onclick="showHint2()">Show Hint</button>
+      <h4>Hint</h4>
+      <div style="height: 300px; width: 800px;">
+        <img id="hint2" src="t2_hint.png" alt="task2 hint" style="display:none;"></img>
+      </div>
 
       <h4>Generated Code</h4>
       <pre id="content_t2" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
@@ -507,6 +534,15 @@
             content_t2.innerHTML = code;
           }
         }
+
+        function showHint2() {
+          var x = document.getElementById("hint2");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        }
       </script> 
     </div>
   </div>
@@ -524,7 +560,7 @@
     <div>
       <div id="task3" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_4" style="display: none">
-        <category name="task3" id="paraTaskThree" colour="180">
+        <category name="task3" id="paraTaskThree" colour="220">
           <block type="task_three_main_block"></block>
           <block type="task_three_worker"></block>
           <block type="task_three_jobs">
@@ -541,12 +577,17 @@
         </category>
       </xml>
       <xml id="startBlocks3" style="display: none">
-        <block type="main_block" inline="false" x="20" y="20">
-        </block>
+        <block type="main_block" inline="false" x="20" y="20"></block>
         <block type="work" inline="false" x="20" y="80"></block>
+        <block type="task_three_worker" x="20" y="140"></block>
       </xml>
 
       <button onclick="showCode4()">Generate Java</button>
+      <button onclick="showHint3()">Show Hint</button>
+      <h4>Hint</h4>
+      <div style="height: 300px; width: 800px;">
+        <img id="hint3" src="t3_hint.png" alt="task2 hint" style="display:none;"></img>
+      </div>
 
       <h4>Generated Code</h4>
       <pre id="content_t3" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
@@ -566,6 +607,15 @@
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
             content_t3.innerHTML = code;
+          }
+        }
+
+        function showHint3() {
+          var x = document.getElementById("hint3");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
           }
         }
       </script> 
