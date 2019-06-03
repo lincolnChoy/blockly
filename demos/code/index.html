@@ -31,17 +31,31 @@
 <body>
   <h1> Learn Parallel Programming Basis in Java using Blockly</h1>
 
-  <div id="PP_intro" class="section">
+  <div class="section">
     <h3> Introduction to Parallel Programming</h3>
     <p>
-      Parallel computing is a type of computation which multiple processing elements collabrate to process a task simultaneously.
-      Higer performance is aimed for using parallel computing techniques comparing with sequencial processing. 
-      By breaking up the problem into multiple parts, each processing element can execute the part with others simultaneously.
+      Parallel computing is a type of computation in which multiple processing elements collaborate to process a computing task simultaneously.
+    </p>
+    <p>
+      This type of computational technique usually results in a higher performance when compared with sequential processing.
+    </p>
+    <p>
+      By breaking up the problem into multiple parts, each processing element can execute their own task in parallel.
+    </p>
+    <p>
+      To assign tasks to a processing element, (i.e, a processor core), we can assign thread(s) to a core which will execute the task at hand.
     </p>
     <figure>
         <img src="seq_para_programming.png" alt="Parallel computing vs sequential computing"></img>
-        <figcaption>Sequential processing vs parallel processing</figcaption>
     </figure>
+    <br>
+    <p>
+      From this we can deduce that, generally, the higher number of cores a processor has - the more the program can benefit from parallelisation, since we can have more threads to help execute these tasks.
+    </p>
+    <p>
+      However, there is some overhead associated with using threads as you will soon see in the exercises below.
+      Therefore, when doing parallel programming, we must consider other factors that can influence the execution time and adjust our code accordingly.
+    </p>
   </div>
 
   <div id="Blockly_intro" class="section">
@@ -50,10 +64,9 @@
         <a href="https://developers.google.com/blockly/">Blockly</a> is an open-sourced, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
     </p>
     <p>
-        Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to make your own programme. 
-        The blocks structure you make can be used to generate real JavaScript, Python, PHP, Lua and Dart code.
-        Extensions for other language can be found on Github. Here is the <a href="https://github.com/toebes-extreme/blockly">Java Extension of Blockly</a>.
-    </p>
+      So Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to create your own program. 
+      The blocks structure you make can be used to generate real JavaScript, Python, PHP, Lua and Dart code.
+      Extensions for other languages can be found on Github. Our parallel extension of Blockly was built off an <a href="https://github.com/toebes-extreme/blockly"> open-source Java Extension</a>.
     <h4>Try Blockly</h4>
     <p>
         Drag and drop blocks. Generate Java code and run it in a Java IDE.
@@ -389,23 +402,25 @@
         }
       </script>
   </div>
-
+  <hr>
   <div id="task1_section" class="section">
-    <h3>Task1: Sequential Processing</h3>
-    <p>Task1 descriptions:</p>
-    <p>What you need to do:</p>
+    <h3>Task one: Sequential Processing</h3>
+    <p>Description:</p>
+    <p>This task will require you to create a program which executes work <b>sequentially</b>.</p>
+    <p>This is how a lot of tasks are normally executed on your processor.</p>
+    <br>
+    <p>Instructions:</p>
     <ol>
-      <li>Defines the task being performed.</li>
-      <li>Modify the task size.</li>
-      <li>Generate the code and run it in Java IDE to see time taken to run the task</li>
-      <li>Try different size of tasks and see what is the relationship between the size of task and the running time.</li>
+      <li>Click on the <b>task1</b> ribbon to bring up the blocks.</li>
+      <li>For each core that you have on your processor, put one task in the <b>Main</b> block.</li>
+      <li>Put the <b>start timer</b> and <b>end timer</b> blocks inside the main but at the top and bottom of the main respectively.</li>
+      <li>Click on the <b>Generate Java</b> button to get the equivalent Java code. You can run this code in an IDE to see how long it takes to execute.</li>
+      <li>You can try different task sizes and see how they affect the execution time.</li>
     </ol> 
-    <p>The task we are computing is calculating the complex.....</p>
     <div>
       <div id="task1" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_2" style="display: none">
         <category name="task1" id="catParallel" colour="250">
-          <block type="main_block"></block>
           <block type="sequential">
             <value name="SIZE">
               <shadow type="math_number">
@@ -413,7 +428,6 @@
               </shadow>
             </value>
           </block>
-          <block type="work"></block>
           <block type ="start_timer"></block>
           <block type ="stop_timer"></block>
         </category>   
@@ -449,22 +463,25 @@
       </script> 
     </div>
   </div>
-
+  <hr>
   <div id="task2_section" class="section">
-    <h3>Task2: Granularity</h3>
-    <p>Task2 descriptions:</p>
-    <p>What you need to do:</p>
+    <h3>Task two: Parallel Processing</h3>
+    <p>Description:</p>
+    <p>This task will require you to create a program which executes work in <b>parallel</b>.</p>
+    <p>As explained earlier, this should theoretically be faster than sequential execution.</p>
+    <br>
+    <p>Instructions:</p>
     <ol>
-      <li>Defines the task being performed.</li>
-      <li>Modify the task size.</li>
-      <li></li>
+      <li>Click on the <b>task2</b> ribbon to bring up the blocks.</li>
+      <li>For each core that you have on your processor, put one task in the <b>Main</b> block.</li>
+      <li>Put the <b>start timer</b> and <b>end timer</b> blocks inside the main but at the top and bottom of the main respectively.</li>
+      <li>Click on the <b>Generate Java</b> button to get the equivalent Java code. You can run this code in an IDE to see how long it takes to execute.</li>
+      <li>You can try different task sizes and see how they affect the execution time.</li>
     </ol> 
-    <p>The task we are computing is calculating the complex.....</p>
     <div>
       <div id="task2" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_3" style="display: none">
         <category name="task2" id="catTaskTwo" colour="150">
-          <block type="task_two_main_block"></block>
           <block type="task_two_worker"></block>
           <block type="task_two_jobs">
             <value name="NUMTASK">
@@ -474,7 +491,6 @@
             </value>
           </block>
           <block type="task_two_distribute_work"></block>
-          <block type="task_two_work"></block>
           <block type ="start_timer"></block>
           <block type ="stop_timer"></block>
         </category>   
@@ -510,7 +526,7 @@
       </script> 
     </div>
   </div>
-
+  <hr>
   <div id="task3_section" class="section">
     <h3>Task3: Scheduling</h3>
     <p>Task2 descriptions:</p>
