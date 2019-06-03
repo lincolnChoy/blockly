@@ -480,7 +480,6 @@
     <p>Instructions:</p>
     <ol>
       <li>Click on the <b>task2</b> ribbon to bring up the blocks.</li>
-      <li>Place the <b>Declare Worker class</b> block somewhere <b>outside</b> of the <b>Main</b>.</li>
       <li>Place the <b>Initialize ... jobs as coarse grained tasks</b> in the <b>Main</b>, where the number of jobs is equal to your number of processor cores.</li>
       <li>Below the job initialization, place the <b>Distribute jobs to workers with workers equal to your cores</b> block.</li>
       <li>Like in task one, you can place the <b>start timer</b> and <b>end timer</b> blocks inside the main to get the execution time.</li>
@@ -501,7 +500,6 @@
       <div id="task2" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_3" style="display: none">
         <category name="task2" id="catTaskTwo" colour="150">
-          <block type="task_two_worker"></block>
           <block type="task_two_jobs">
             <value name="NUMTASK">
               <shadow type="math_number">
@@ -555,7 +553,6 @@
     <p>Instructions:</p>
     <ol>
       <li>Click on the <b>task3</b> ribbon to bring up the blocks.</li>
-      <li>Place the <b>Declare Worker class with static tasking</b> block somewhere <b>outside</b> of the <b>Main</b>.</li>
       <li>Place the <b>Initialize ... jobs as coarse grained tasks</b> in the <b>Main</b>, where the number of jobs is equal to your number of processor cores.</li>
       <li>Below the job initialization, place the <b>Distribute jobs to workers statically</b> block.</li>
       <li>Like in task one and two, you can place the <b>start timer</b> and <b>end timer</b> blocks inside the main to get the execution time.</li>
@@ -563,7 +560,7 @@
     </ol>
     <br>
     <p>Explanation:</p>
-    <p>The resulting program does exactly the same things as the program in <b>Task two: Parallel Processing</b>, and this program uses a scheduling policy called static scheduling.</p>
+    <p>The resulting program does exactly the same thing as the program in <b>Task two: Parallel Processing</b>, and this program uses a scheduling policy called static scheduling.</p>
     <p>Static scheduling involves assigning an equal number of tasks at the start of the program to each processor core. With coarse-grained or fine-grained task sizes, this is generally a great scheduling policy.</p>
     <p>But what if our tasks were of <b>varying</b> sizes? There is a possibility that we give all of the large tasks to <b>one</b> processor core, while the others handle the smaller tasks.</p>
     <p>If this were to happen, all of the other processor cores would quickly finish the small tasks that were assigned to them, while <b>just one</b> of the processor cores <b>continue</b> to work on the large tasks while the other cores are just sitting there doing nothing.</p>
@@ -578,7 +575,6 @@
       <div id="task3" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_4" style="display: none">
         <category name="task3" id="paraTaskThree" colour="180">
-          <block type="task_three_worker"></block>
           <block type="task_three_jobs">
             <value name="NUMTASK">
               <shadow type="math_number">
@@ -587,7 +583,6 @@
             </value>
           </block>
           <block type="task_three_distribute_work"></block>
-          <block type="task_three_work"></block>
           <block type ="start_timer"></block>
           <block type ="stop_timer"></block>
         </category>
