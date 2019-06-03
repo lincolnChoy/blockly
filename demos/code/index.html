@@ -54,7 +54,7 @@
     </p>
     <p>
       However, there is some overhead associated with using threads as you will soon see in the exercises below.
-      Therefore, when doing parallel programming, we must consider other factors that can influence the execution time and adjust our code accordingly.
+      Therefore, when doing parallel programming, we must consider other factors, such as task granularity (size of the tasks), that can influence the execution time and adjust our code accordingly.
     </p>
   </div>
   <hr>
@@ -457,7 +457,7 @@
         function showCode2() {
           var content = document.getElementById('content_t1');
           code = Blockly.Java.workspaceToCode(workspace2);
-          content.innerHTML = code;
+          content.textContent = code;
           if (typeof prettyPrintOne == 'function') {
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
@@ -532,7 +532,7 @@
         function showCode3() {
           var content = document.getElementById('content_t2');
           code = Blockly.Java.workspaceToCode(workspace3);
-          content.innerHTML = code;
+          content.textContent = code;
           if (typeof prettyPrintOne == 'function') {
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
@@ -609,7 +609,7 @@
         function showCode4() {
           var content = document.getElementById('content_t3');
           code = Blockly.Java.workspaceToCode(workspace4);
-          content.innerHTML = code;
+          content.textContent = code;
           if (typeof prettyPrintOne == 'function') {
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
@@ -619,9 +619,10 @@
       </script> 
     </div>
   </div>
-  
+  <hr>
   <div id="task3_section" class="section">
-    <h3>Summary</h3>
+    <h3>Lesson of the day</h3>
+    <p>Parallelizing a program through the use of threads is a great way to get your processor to do many things at once.</p>
   </div>
 
   
