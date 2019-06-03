@@ -104,7 +104,7 @@ Code.getStringParamFromUrl = function(name, defaultValue) {
  */
 Code.getLang = function() {
   var lang = Code.getStringParamFromUrl('lang', '');
-  if (Code.LANGUAGE_NAME[lang] === undefined) {
+  if (Code.LANGUAGE_NAME[lang] === undefined) {saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     // Default to English.
     lang = 'en';
   }

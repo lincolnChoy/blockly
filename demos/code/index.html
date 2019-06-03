@@ -50,18 +50,18 @@
     </figure>
     <br>
     <p>
-      From this we can deduce that, generally, the higher number of cores a processor has - the more the program can benefit from parallelisation, since we can have more threads to help execute these tasks.
+      From this we can deduce that, generally, the higher number of cores a processor has - the more the program can benefit from parallelization, since we can have more threads to help execute these tasks.
     </p>
     <p>
       However, there is some overhead associated with using threads as you will soon see in the exercises below.
       Therefore, when doing parallel programming, we must consider other factors that can influence the execution time and adjust our code accordingly.
     </p>
   </div>
-
+  <hr>
   <div id="Blockly_intro" class="section">
     <h3>What is Blockly?</h3>
     <p>
-        <a href="https://developers.google.com/blockly/">Blockly</a> is an open-sourced, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
+        <a href="https://developers.google.com/blockly/">Blockly</a> is an open-source, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
     </p>
     <p>
       So Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to create your own program. 
@@ -416,7 +416,10 @@
       <li>Put the <b>start timer</b> and <b>end timer</b> blocks inside the main but at the top and bottom of the main respectively.</li>
       <li>Click on the <b>Generate Java</b> button to get the equivalent Java code. You can run this code in an IDE to see how long it takes to execute.</li>
       <li>You can try different task sizes and see how they affect the execution time.</li>
-    </ol> 
+    </ol>
+    <p>Explanation:</p>
+    <p>Note the time that it takes for this program to execute on a <b>single</b> processor core.</p>
+    <p>Imagine if we could somehow assign each one of these tasks to threads across all of the available processor cores, what would be the theoretical speedup of the program? (i.e. how much faster would it run?)</p> 
     <div>
       <div id="task1" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_2" style="display: none">
@@ -473,11 +476,21 @@
     <p>Instructions:</p>
     <ol>
       <li>Click on the <b>task2</b> ribbon to bring up the blocks.</li>
-      <li>For each core that you have on your processor, put one task in the <b>Main</b> block.</li>
-      <li>Put the <b>start timer</b> and <b>end timer</b> blocks inside the main but at the top and bottom of the main respectively.</li>
+      <li>Place the <b>Initialize ... jobs as coarse grained tasks</b> in the <b>Main</b>, where the number of jobs is equal to your number of processor cores.</li>
+      <li>Below the job initialization, place the <b>Distribute jobs to workers with workers equal to your cores</b> block.</li>
+      <li>Like in task one, you can place the <b>start timer</b> and <b>end timer</b> blocks inside the main to get the execution time.</li>
       <li>Click on the <b>Generate Java</b> button to get the equivalent Java code. You can run this code in an IDE to see how long it takes to execute.</li>
-      <li>You can try different task sizes and see how they affect the execution time.</li>
-    </ol> 
+    </ol>
+    <br>
+    <p>Explanation:</p>
+    <p>You should notice that the execution time of the parallelized version should be around <b>n</b> times faster than the program in <b>Task one: Sequential Processing</b>, where <b>n</b> is the number of processors cores available.</p>
+    <p>This is because, instead of having only <b>one</b> processor core working on some number of tasks, e.g. 4 tasks if you had 4 processor cores, it can spread the work load <b>evenly among the 4 cores</b>.</p>
+    <p>Although threads are great for parallelizing tasks, it doesn't mean we should create as many threads as possible to maximize parallelization.</p>
+    <p>In fact, threads can introduce <b>overhead</b> through the <b>creation/deletion</b> of the threads. That is, it takes time to create the threads and assign them tasks, and then deleting them also takes time.</p>
+    <p>There is also overhead in <b>context switching</b>. Context switching happens when there is not as many cores as there are threads.</p>
+    <p>As such, the processor core must switch between different threads to elicit concurrency. But it is the switching between the threads which can waste time, and this causes our CPU utilization to not be maximized.</p>
+    <p>So in general, you only want as many threads as your processor cores.</p>
+    <p>You can </p>
     <div>
       <div id="task2" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_3" style="display: none">
@@ -528,9 +541,11 @@
   </div>
   <hr>
   <div id="task3_section" class="section">
-    <h3>Task3: Scheduling</h3>
-    <p>Task2 descriptions:</p>
-    <p>What you need to do:</p>
+    <h3>Task three: Scheduling (Static VS Dynamic)</h3>
+    <p>Description:</p>
+    <p>This task will help you understand the differences between the static and dynamic scheduling policies in parallel programming.</p>
+    <br>
+    <p>Instructions:</p>
     <ol>
       <li>Defines the task being performed.</li>
       <li>Modify the task size.</li>
