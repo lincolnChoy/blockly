@@ -26,7 +26,6 @@
   <script src="../../blocks/parallel.js"></script>
   <script src="../../blocks/task_two.js"></script>
   <script src="../../blocks/task_three.js"></script>
-  <script src="code.js"></script>
 </head>
 
 <body>
@@ -363,6 +362,8 @@
         <category name="Variables" id="catVariables" colour="330" custom="VARIABLE"></category>
         <category name="Functions" id="catFunctions" colour="290" custom="PROCEDURE"></category>   
       </xml>
+      <xml id="startBlocks" style="display: none">
+      </xml>
 
       <button onclick="showCode()">Generate Java</button>
 
@@ -389,16 +390,21 @@
       </script>
   </div>
 
-
   <div id="task1_section" class="section">
-    <h3>Task1</h3>
+    <h3>Task1: Sequential Processing</h3>
     <p>Task1 descriptions:</p>
     <p>What you need to do:</p>
+    <ol>
+      <li>Defines the task being performed.</li>
+      <li>Modify the task size.</li>
+      <li>Generate the code and run it in Java IDE to see time taken to run the task</li>
+      <li>Try different size of tasks and see what is the relationship between the size of task and the running time.</li>
+    </ol> 
     <p>The task we are computing is calculating the complex.....</p>
     <div>
       <div id="task1" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_2" style="display: none">
-        <category name="task1"id="catParallel" colour="250">
+        <category name="task1" id="catParallel" colour="250">
           <block type="main_block"></block>
           <block type="sequential">
             <value name="SIZE">
@@ -412,6 +418,11 @@
           <block type ="stop_timer"></block>
         </category>   
       </xml>
+      <xml id="startBlocks1" style="display: none">
+        <block type="main_block" inline="false" x="20" y="20">
+        </block>
+        <block type="work" inline="false" x="20" y="80"></block>
+      </xml>
 
       <button onclick="showCode2()">Generate Java</button>
 
@@ -422,8 +433,8 @@
         var workspace2 = Blockly.inject('task1',
         {media: '../../media/',
         toolbox: document.getElementById('toolbox_2')});
-        Blockly.Xml.domToWorkspace(workspace1,
-        document.getElementById('startBlocks2'));
+        Blockly.Xml.domToWorkspace(workspace2,
+        document.getElementById('startBlocks1'));
 
         function showCode2() {
           var content = document.getElementById('content_t1');
@@ -436,34 +447,134 @@
           }
         }
       </script> 
-    
     </div>
-
-
-
-
-
-      <p>
-          Java parallel
-      </p>
-      <h4>Example to process</h4>
-        <p>
-            What is squential programming? What is the example we are using in Java?
-        </p>
-      <h4>Granularity</h4>
-      <p>
-          What is granularity?
-          relation of number of tasks to their sizes
-          – coarse grain: few large tasks
-          – fine grain: many small tasks
-          an image to demo the graularity here:
-      </p>
-      <img src="seq_para_programming.png" alt="Parallel computing vs sequential computing"></img>
   </div>
 
-  <div class="section">
-     
+  <div id="task2_section" class="section">
+    <h3>Task2: Granularity</h3>
+    <p>Task2 descriptions:</p>
+    <p>What you need to do:</p>
+    <ol>
+      <li>Defines the task being performed.</li>
+      <li>Modify the task size.</li>
+      <li></li>
+    </ol> 
+    <p>The task we are computing is calculating the complex.....</p>
+    <div>
+      <div id="task2" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
+      <xml id="toolbox_3" style="display: none">
+        <category name="task2" id="catTaskTwo" colour="150">
+          <block type="task_two_main_block"></block>
+          <block type="task_two_worker"></block>
+          <block type="task_two_jobs">
+            <value name="NUMTASK">
+              <shadow type="math_number">
+                <field name="NUM">6</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="task_two_distribute_work"></block>
+          <block type="task_two_work"></block>
+          <block type ="start_timer"></block>
+          <block type ="stop_timer"></block>
+        </category>   
+      </xml>
+      <xml id="startBlocks2" style="display: none">
+        <block type="main_block" inline="false" x="20" y="20">
+        </block>
+        <block type="work" inline="false" x="20" y="80"></block>
+      </xml>
+
+      <button onclick="showCode3()">Generate Java</button>
+
+      <h4>Generated Code</h4>
+      <pre id="content_t2" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
+
+      <script>
+        var workspace3 = Blockly.inject('task2',
+        {media: '../../media/',
+        toolbox: document.getElementById('toolbox_3')});
+        Blockly.Xml.domToWorkspace(workspace3,
+        document.getElementById('startBlocks2'));
+
+        function showCode3() {
+          var content = document.getElementById('content_t2');
+          code = Blockly.Java.workspaceToCode(workspace3);
+          content.innerHTML = code;
+          if (typeof prettyPrintOne == 'function') {
+            code = content.innerHTML;
+            code = prettyPrintOne(code, 'java');
+            content_t2.innerHTML = code;
+          }
+        }
+      </script> 
+    </div>
+  </div>
+
+  <div id="task3_section" class="section">
+    <h3>Task3: Scheduling</h3>
+    <p>Task2 descriptions:</p>
+    <p>What you need to do:</p>
+    <ol>
+      <li>Defines the task being performed.</li>
+      <li>Modify the task size.</li>
+      <li></li>
+    </ol> 
+    <p>The task we are computing is calculating the complex.....</p>
+    <div>
+      <div id="task3" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
+      <xml id="toolbox_4" style="display: none">
+        <category name="task3" id="paraTaskThree" colour="180">
+          <block type="task_three_main_block"></block>
+          <block type="task_three_worker"></block>
+          <block type="task_three_jobs">
+            <value name="NUMTASK">
+              <shadow type="math_number">
+                <field name="NUM">6</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="task_three_distribute_work"></block>
+          <block type="task_three_work"></block>
+          <block type ="start_timer"></block>
+          <block type ="stop_timer"></block>
+        </category>
+      </xml>
+      <xml id="startBlocks3" style="display: none">
+        <block type="main_block" inline="false" x="20" y="20">
+        </block>
+        <block type="work" inline="false" x="20" y="80"></block>
+      </xml>
+
+      <button onclick="showCode4()">Generate Java</button>
+
+      <h4>Generated Code</h4>
+      <pre id="content_t3" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
+
+      <script>
+        var workspace4 = Blockly.inject('task3',
+        {media: '../../media/',
+        toolbox: document.getElementById('toolbox_4')});
+        Blockly.Xml.domToWorkspace(workspace4,
+        document.getElementById('startBlocks3'));
+
+        function showCode4() {
+          var content = document.getElementById('content_t3');
+          code = Blockly.Java.workspaceToCode(workspace4);
+          content.innerHTML = code;
+          if (typeof prettyPrintOne == 'function') {
+            code = content.innerHTML;
+            code = prettyPrintOne(code, 'java');
+            content_t3.innerHTML = code;
+          }
+        }
+      </script> 
+    </div>
+  </div>
   
-  
+  <div id="task3_section" class="section">
+    <h3>Summary</h3>
+  </div>
+
   
 </body>
