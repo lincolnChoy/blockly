@@ -9,7 +9,10 @@ blocks together to build programs.  All code is free and open source.
 
 # Parallel Java Blockly Extension
 
-To test the custom blocks:
+To test the custom blocks:    
+Visit:    
+https://lincolnchoy.github.io/blockly    
+OR    
 1. Navigate through the following folders. demos > code 
 2. In the code folder, open index.html in the browser of your choice.
 
