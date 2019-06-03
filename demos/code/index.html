@@ -26,6 +26,8 @@
   <script src="../../blocks/parallel.js"></script>
   <script src="../../blocks/task_two.js"></script>
   <script src="../../blocks/task_three.js"></script>
+  <script src="workspace.js"></script>
+  <script src="code.js"></script>
 </head>
 
 <body>
@@ -64,7 +66,7 @@
         <a href="https://developers.google.com/blockly/">Blockly</a> is an open-source, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
     </p>
     <p>
-      So Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to create your own program. 
+      Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to create your own program. 
       The blocks structure you make can be used to generate real JavaScript, Python, PHP, Lua and Dart code.
       Extensions for other languages can be found on Github. Our parallel extension of Blockly was built off an <a href="https://github.com/toebes-extreme/blockly"> open-source Java Extension</a>.
     <h4>Try Blockly</h4>
@@ -444,7 +446,11 @@
       </xml>
 
       <button onclick="showCode2()">Generate Java</button>
-
+      <button onclick="showHint1()">Show Hint</button>
+      <h4>Hint</h4>
+      <div style="height: 500px; width: 800px;">
+        <img id="hint1" src="t1_hint.png" alt="task1 hint" style="display:none;"></img>
+      </div>
       <h4>Generated Code</h4>
       <pre id="content_t1" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
 
@@ -463,6 +469,14 @@
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
             content_t1.innerHTML = code;
+          }
+        }
+        function showHint1() {
+          var x = document.getElementById("hint1");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
           }
         }
       </script> 
@@ -513,13 +527,17 @@
         </category>   
       </xml>
       <xml id="startBlocks2" style="display: none">
-        <block type="main_block" inline="false" x="20" y="20">
-        </block>
+        <block type="main_block" inline="false" x="20" y="20"></block>
         <block type="work" inline="false" x="20" y="80"></block>
+        <block type="task_two_worker" inline="false" x="20" y="140"></block>
       </xml>
 
       <button onclick="showCode3()">Generate Java</button>
-
+      <button onclick="showHint2()">Show Hint</button>
+      <h4>Hint</h4>
+      <div style="height: 300px; width: 800px;">
+        <img id="hint2" src="t2_hint.png" alt="task2 hint" style="display:none;"></img>
+      </div>
       <h4>Generated Code</h4>
       <pre id="content_t2" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
 
@@ -538,6 +556,14 @@
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
             content_t2.innerHTML = code;
+          }
+        }
+        function showHint2() {
+          var x = document.getElementById("hint2");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
           }
         }
       </script> 
@@ -590,13 +616,17 @@
         </category>
       </xml>
       <xml id="startBlocks3" style="display: none">
-        <block type="main_block" inline="false" x="20" y="20">
-        </block>
+        <block type="main_block" inline="false" x="20" y="20"></block>
         <block type="work" inline="false" x="20" y="80"></block>
+        <block type="task_three_worker" x="20" y="140"></block>
       </xml>
 
       <button onclick="showCode4()">Generate Java</button>
-
+      <button onclick="showHint3()">Show Hint</button>
+      <h4>Hint</h4>
+      <div style="height: 300px; width: 800px;">
+        <img id="hint3" src="t3_hint.png" alt="task2 hint" style="display:none;"></img>
+      </div>
       <h4>Generated Code</h4>
       <pre id="content_t3" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
 
@@ -615,6 +645,14 @@
             code = content.innerHTML;
             code = prettyPrintOne(code, 'java');
             content_t3.innerHTML = code;
+          }
+        }
+        function showHint3() {
+          var x = document.getElementById("hint3");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
           }
         }
       </script> 
