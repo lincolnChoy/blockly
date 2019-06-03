@@ -7,7 +7,7 @@ blocks together to build programs.  All code is free and open source.
 
 ![](https://developers.google.com/blockly/sample.png)
 
-Parallel Java Blockly Extension
+# Parallel Java Blockly Extension
 
 To test the custom blocks:
 1. Navigate through the following folders. demos > code 
