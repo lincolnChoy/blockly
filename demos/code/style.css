@@ -27,6 +27,10 @@ h3 {
   color: #D95D39;
 }
 
+h4  {
+  color: #422040;
+}
+
 .section {
   margin: 35px;
 }
@@ -38,7 +42,8 @@ p {
 .blockly_workspace{
   
 }
-.blockly_output {
+
+.content {
   background-color: #74A4BC;
 }
 

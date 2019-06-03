@@ -52,14 +52,17 @@
         <a href="https://developers.google.com/blockly/">Blockly</a> is an open-sourced, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
     </p>
     <p>
-        So Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to make your own programme. 
+        Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to make your own programme. 
         The blocks structure you make can be used to generate real JavaScript, Python, PHP, Lua and Dart code.
         Extensions for other language can be found on Github. Here is the <a href="https://github.com/toebes-extreme/blockly">Java Extension of Blockly</a>.
     </p>
     <h4>Try Blockly</h4>
+    <p>
+        Drag and drop blocks. Generate Java code and run it in a Java IDE.
+    </p>
     <div id="try_blockly" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
-      <xml id="toolbox" style="display: none">
-          <category name="Logic">
+      <xml id="toolbox_1" style="display: none">
+        <category name="Logic">
             <block type="controls_if"></block>
             <block type="logic_compare"></block>
             <block type="logic_operation"></block>
@@ -85,37 +88,46 @@
             <block type="text"></block>
             <block type="text_length"></block>
             <block type="text_print"></block>
-          </category>
-        </xml>
-        <button onclick="showCode()">Generate Java</button>
-        <button onclick="copyCode()">Copy Code to Clipboard</button>
-        <div id="try_blockly_out" class="blockly_output" style="height: 280px; width: 800px; overflow-y: scroll;"></div>
+          </category>   
+      </xml>
+
+      <button onclick="showCode()">Generate Java</button>
+
+      <h4>Generated Code</h4>
+      <pre id="content_java" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
+
       <script>
         var workspace1 = Blockly.inject('try_blockly',
         {media: '../../media/',
-        toolbox: document.getElementById('toolbox')});
+        toolbox: document.getElementById('toolbox_1')});
         Blockly.Xml.domToWorkspace(workspace1,
         document.getElementById('startBlocks'));
 
         function showCode() {
           // Generate JavaScript code and display it.
-          Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-          var code = Blockly.Java.workspaceToCode(workspace1);
-          //alert(code);
-          //code = Blockly.Java.workspaceToCode(Code.workspace);
-          document.getElementById("try_blockly_out").innerHTML = code;
-        }
-        function copyCode() {
-          var copyText1 = document.getElementById("try_blockly_out");
-          copyText1.select();
-          document.execCommand("copy");
-          alert("Java code Copied to Clipboard.");
+          //Blockly.Java.INFINITE_LOOP_TRAP = null;
+          //var code = Blockly.Java.workspaceToCode(workspace1);
+          //document.getElementById("content_java").textContent = code;
+
+          var content = document.getElementById('content_java');
+          code = Blockly.Java.workspaceToCode(workspace1);
+          content.innerHTML = code;
+          if (typeof prettyPrintOne == 'function') {
+            code = content.innerHTML;
+            code = prettyPrintOne(code, 'java');
+            content_java.innerHTML = code;
+          }
         }
       </script>
-    </div>
+  </div>
+
 
   <div class="section">
-      <h3>Parallel Programming in Java</h3>
+    <h3>Introduction to Blocks related to Java Parallelism</h3>
+    <div>
+      
+      
+    </div>
       <p>
           Java parallel
       </p>
@@ -136,6 +148,7 @@
 
   <div class="section">
      
-    </div>
+  
+  
   
 </body>
