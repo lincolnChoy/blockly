@@ -26,6 +26,8 @@
   <script src="../../blocks/parallel.js"></script>
   <script src="../../blocks/task_two.js"></script>
   <script src="../../blocks/task_three.js"></script>
+  <script src="workspace.js"></script>
+  <script src="code.js"></script>
 </head>
 
 <body>
@@ -64,7 +66,7 @@
         <a href="https://developers.google.com/blockly/">Blockly</a> is an open-source, client-sided JavaScript library that adds a visual code editor to web and mobile apps.
     </p>
     <p>
-      So Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to create your own program. 
+      Blockly is a visual programming tool made up of blocks. You can use the drag and drop features to create your own program. 
       The blocks structure you make can be used to generate real JavaScript, Python, PHP, Lua and Dart code.
       Extensions for other languages can be found on Github. Our parallel extension of Blockly was built off an <a href="https://github.com/toebes-extreme/blockly"> open-source Java Extension</a>.
     <h4>Try Blockly</h4>
@@ -444,7 +446,7 @@
       </xml>
 
       <button onclick="showCode2()">Generate Java</button>
-
+      
       <h4>Generated Code</h4>
       <pre id="content_t1" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
 
@@ -513,13 +515,13 @@
         </category>   
       </xml>
       <xml id="startBlocks2" style="display: none">
-        <block type="main_block" inline="false" x="20" y="20">
-        </block>
+        <block type="main_block" inline="false" x="20" y="20"></block>
         <block type="work" inline="false" x="20" y="80"></block>
+        <block type="task_two_worker" inline="false" x="20" y="140"></block>
       </xml>
 
       <button onclick="showCode3()">Generate Java</button>
-
+      
       <h4>Generated Code</h4>
       <pre id="content_t2" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
 
@@ -540,6 +542,7 @@
             content_t2.innerHTML = code;
           }
         }
+        
       </script> 
     </div>
   </div>
@@ -590,13 +593,13 @@
         </category>
       </xml>
       <xml id="startBlocks3" style="display: none">
-        <block type="main_block" inline="false" x="20" y="20">
-        </block>
+        <block type="main_block" inline="false" x="20" y="20"></block>
         <block type="work" inline="false" x="20" y="80"></block>
+        <block type="task_three_worker" x="20" y="140"></block>
       </xml>
 
       <button onclick="showCode4()">Generate Java</button>
-
+      
       <h4>Generated Code</h4>
       <pre id="content_t3" class="content" style="height: 280px; width: 800px; overflow-y: scroll;"></pre>
 
@@ -617,6 +620,7 @@
             content_t3.innerHTML = code;
           }
         }
+        
       </script> 
     </div>
   </div>
