@@ -623,6 +623,11 @@
   <div id="task3_section" class="section">
     <h3>Lesson of the day</h3>
     <p>Parallelizing a program through the use of threads is a great way to get your processor to do many things at once.</p>
+    <p>However, it isn't always a great idea to use A LOT of threads due to overhead in thread creation and context switching. A general rule of thumb is to have <b>as many threads as processor cores available</b>.</p>
+    <p>Also, when dealing with task sizes that aren't the same (this happens a lot in the real world), the dynamic scheduling policy is a great way to assign tasks to threads that have nothing to do.</p>
+    <p>As a parallel programmer, we must always be aware of the tasks that we're dealing with, and the processor that we're working with. 
+      These factors can play a big role in how the program should be parallelized, and if not done correctly, this can sometimes lead to the program slowing down instead of speeding up.</p>
+
   </div>
 
   
