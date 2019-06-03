@@ -420,6 +420,7 @@
     <p>Explanation:</p>
     <p>Note the time that it takes for this program to execute on a <b>single</b> processor core.</p>
     <p>Imagine if we could somehow assign each one of these tasks to threads across all of the available processor cores, what would be the theoretical speedup of the program? (i.e. how much faster would it run?)</p> 
+    <br>
     <div>
       <div id="task1" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_2" style="display: none">
@@ -492,6 +493,7 @@
     <p>As such, the processor core must switch between different threads to elicit concurrency. But it is the switching between the threads which can waste time, and this causes our CPU utilization to not be maximized.</p>
     <p>So in general, you only want as many threads as your processor cores.</p>
     <p>You can play around with the number of tasks and the task sizes to see how they can also affect the execution time.</p>
+    <br>
     <div>
       <div id="task2" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_3" style="display: none">
@@ -554,7 +556,20 @@
       <li>Below the job initialization, place the <b>Distribute jobs to workers statically</b> block.</li>
       <li>Like in task one and two, you can place the <b>start timer</b> and <b>end timer</b> blocks inside the main to get the execution time.</li>
       <li>Click on the <b>Generate Java</b> button to get the equivalent Java code. You can run this code in an IDE to see how long it takes to execute.</li>
-    </ol> 
+    </ol>
+    <br>
+    <p>Explanation:</p>
+    <p>The resulting program does exactly the same things as the program in <b>Task two: Parallel Processing</b>, and this program uses a scheduling policy called static scheduling.</p>
+    <p>Static scheduling involves assigning an equal number of tasks at the start of the program to each processor core. With coarse-grained or fine-grained task sizes, this is generally a great scheduling policy.</p>
+    <p>But what if our tasks were of <b>varying</b> sizes? There is a possibility that we give all of the large tasks to <b>one</b> processor core, while the others handle the smaller tasks.</p>
+    <p>If this were to happen, all of the other processor cores would quickly finish the small tasks that were assigned to them, while <b>just one</b> of the processor cores <b>continue</b> to work on the large tasks while the other cores are just sitting there doing nothing.</p>
+    <p>This is a waste of resources, if we have cores available, but they aren't doing anything, what's the point of having them?</p>
+    <p>As such, we need a scheduling policy to help combat this problem, a way for idle cores/threads to pick up more tasks if there is still work to be done. This is known as <b>dynamic scheduling</b>.</p>
+    <p>With dynamic scheduling, instead of assigning tasks to each thread at the <b>start</b> of the program, a thread/core is only assigned a task when it has finished its previous task, or when it has nothing to do.</p>
+    <p>As such, dynamic scheduling is a very popular scheduling policy when dealing with mixed task sizes.</p>
+    <p>You can test this out by changing the task size from <b>coarse-grained</b> to <b>mixed size</b> with 50 (any number larger than the number of cores will do, larger numbers will emphasize the difference) jobs using the static scheduling policy. Run the generated code and note the execution time.</p>
+    <p>Now change the scheduling policy to dynamic and run the code. You should notice that the execution time should be shorter due to the tasks being assigned in a more balanced fashion across the cores.</p>
+    <br>
     <div>
       <div id="task3" class="blockly_workspace" style="height: 480px; width: 800px;"></div>
       <xml id="toolbox_4" style="display: none">
